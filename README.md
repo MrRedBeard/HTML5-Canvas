@@ -1,4 +1,4 @@
-# HTML5-Canvas (Work in progress)
+# HTML5-Canvas-JS-Library (Work in progress)
 ### Demo of HTML5 Canvas and JavaScript
 
 Created a JS class to handle canvas actions
