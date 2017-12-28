@@ -1,12 +1,13 @@
 //map.png
 
 
-class TCanvas
+class XCanvas
 {
 	constructor(el)
 	{
-		this.canvasel = el;
-		this.canvas = $(el);
+		this.name = "";
+		this.container = null;
+		this.canvas = el;
 		this.ctx = null;
 		this.configuration = {contextVal: '2d', width: 0, height: 0, showXY: false};
 	}
@@ -35,6 +36,26 @@ class TCanvas
 		}
 	}
 	
+	addMouseEvent()
+	{
+		//Allows clicking of map to get xy by point and click
+		var ctx = this.ctx; //Localize before handing off to function
+		var canvas = this.canvas;
+		var name = this.name;
+		
+		//Add textbox after canvas
+		$("<input style='clear:both; display: block;' type='text' id='XCanvas" + name + "_mousePos" + "' />").appendTo(this.container);
+		
+		canvas.click(function(e)
+		{
+			var parentOffset = $(this).parent().offset(); 
+			//or $(this).offset(); if you really just want the current element's offset
+			var relX = e.pageX - parentOffset.left;
+			var relY = e.pageY - parentOffset.top;
+			$('#XCanvas' + name + "_mousePos").val(relX + ', ' + relY);
+		});
+	}
+	
 	addImg(imgPath, x, y, width, height)
 	{
 		var img = new Image();
@@ -60,6 +81,18 @@ class TCanvas
 			ctx.fillStyle = fontColor;
 			ctx.fillText(someText, x, y);
 		}, 50);
+	}
+	
+	addsvg()
+	{
+		var ctx = this.ctx; //Localize before handing off to function
+		var canvas = this.canvas;
+		//ctx.clearRect(0, 0, canvas.width, canvas.height);
+		var path4 = new Path2D("M213.1,6.7c-32.4-14.4-73.7,0-88.1,30.6C110.6,4.9,67.5-9.5,36.9,6.7C2.8,22.9-13.4,62.4,13.5,110.9 C33.3,145.1,67.5,170.3,125,217c59.3-46.7,93.5-71.9,111.5-106.1C263.4,64.2,247.2,22.9,213.1,6.7z");
+		ctx.zIndex = 15;
+		ctx.strokeStyle = '#000';
+		ctx.lineWidth = 4;
+		ctx.stroke(path4);
 	}
 	
 	/*
@@ -95,70 +128,31 @@ class TCanvas
 		ctx.fill(p);
 	*/
 	
-	addsvg()
-	{
-		var ctx = this.ctx; //Localize before handing off to function
-		var canvas = this.canvas;
-		//ctx.clearRect(0, 0, canvas.width, canvas.height);
-		var path4 = new Path2D("M213.1,6.7c-32.4-14.4-73.7,0-88.1,30.6C110.6,4.9,67.5-9.5,36.9,6.7C2.8,22.9-13.4,62.4,13.5,110.9 C33.3,145.1,67.5,170.3,125,217c59.3-46.7,93.5-71.9,111.5-106.1C263.4,64.2,247.2,22.9,213.1,6.7z");
-		ctx.zIndex = 15;
-		ctx.strokeStyle = '#000';
-		ctx.lineWidth = 4;
-		ctx.stroke(path4);
-	}
 	
-	addMouseEvent()
-	{
-		//Allows clicking of map to get xy by point and click
-		var ctx = this.ctx; //Localize before handing off to function
-		var canvas = this.canvas;
-		var canvasel = this.canvasel;
-		
-		//Add textbox after canvas
-		$("<input style='clear:both; position:relative;' type='text' id='" + canvasel.replace("#", "") + "_mousePos" + "' />").appendTo("body");
-		
-		$(canvasel).click(function(e)
-		{
-			var parentOffset = $(this).parent().offset(); 
-			//or $(this).offset(); if you really just want the current element's offset
-			var relX = e.pageX - parentOffset.left;
-			var relY = e.pageY - parentOffset.top;
-			$(canvasel + "_mousePos").val(relX + ', ' + relY);
-		});
-	}
+	
+	
 }
 
+//Auto configures canvas containers on page
 $(function()
 {
-	var a = new TCanvas('#myCanvas');
-	a.config('2d', '800px', '480px', true); 
-	//a.addImg('map.png', 0, 0, 800, 480);
-	a.addText('\uF276', 'FontAwesome', '48px', "#8c41f4", 654, 277); //Pin
-	a.addText('\uF236', 'FontAwesome', '48px', "#075e00", 150, 250); //Hotel Room
-	a.addText('\uF0F5', 'FontAwesome', '48px', "#000", 250, 50); //Defac
-	a.addText('\uF183\uF182\uF193', 'FontAwesome', '40px', "#0800ff", 50, 300); //Restroom
-	a.addText('\uF0EB', 'FontAwesome', '48px', "#e1e81e", 10, 450); //Class?
-	a.addsvg();
-	
-	/*
-	//Clone and layer
-	$("#myCanvas").zIndex = 1;
-	$("#myCanvas").css("position", "absolute");
-	//Clone and layer
-	var b = $("#myCanvas").clone();
-	b.attr('id', 'myCanvas2');
-	b.zIndex = 0;
-	b.appendTo("body");
-	b.insertBefore("#myCanvas");
-	var c = new TCanvas('#myCanvas2');
-	c.config('2d', '800px', '480px', false); 
-	c.addImg('map.png', 0, 0, 800, 480);*/
-
+	$("[data=XCanvas]").each(function()
+	{
+		var $tempf = $('<canvas class="fa"></canvas>');
+		
+		window[$(this).attr('name')] = new XCanvas($tempf);
+		window[$(this).attr('name')].name = $(this).attr('name');
+		window[$(this).attr('name')].container = this;
+		
+		$($tempf).appendTo(this);
+	});	
 });
 
 
+
 /* FontAwesome
- FA Codes http://seehowsupport.com/font-awesome/
+ FA Codes http://astronautweb.co/snippet/font-awesome/
+		  http://seehowsupport.com/font-awesome/
  \uF276 Map Pin
  \uF08d Thumbtack
  \uF108 Computer
@@ -166,7 +160,7 @@ $(function()
  \uF05A Info
  \uF236 Hotel
  \uF182 \uF183 \uF193 Restroom (female male wheelchair)
- \uF0F5 Defac
+ \uF0F5 Food
  \uF046 Checkbox Frontdesk
  \uF207 Bus Transportation
  \uF0EB Lightbulb Class

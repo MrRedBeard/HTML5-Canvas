@@ -2,14 +2,84 @@
 <html>
 <head>
 <script src="jquery.min.js"></script>
+<script src="canvas.js"></script>
 <link rel="stylesheet" href="font-awesome.min.css">
 </head>
 <body>
-<BR /><BR /><BR /><BR /><BR />
-	<div style="position: relative;">
-		<canvas id="myCanvas" class="fa" style="border:1px solid #000000;">
-		</canvas>
-	</div>
+	<div name="example" data="XCanvas"></div>
+	<script>
+		$(function()
+		{
+			example.config('2d', '800px', '480px', true); 
+			example.addImg('map.png', 0, 0, 800, 480);
+			example.addText('\uF276', 'FontAwesome', '48px', "#8c41f4", 651, 73); //Pin
+			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 286, 405); //Home
+			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 364, 405); //Home
+			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 442, 405); //Home
+			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 520, 405); //Home
+			
+			example.addText('\uf19c', 'FontAwesome', '60px', "#702c00", 150, 110); //University
+			
+			example.addText('\uf0c8', 'FontAwesome', '15px', "#ffffff", 182, 153); //Square
+			example.addText('\uf0c8', 'FontAwesome', '50px', "#ffffff", 167, 191); //Square
+			example.addText('\uf0f8', 'FontAwesome', '60px', "#21303d", 165, 190); //Hospital
+			
+			example.addText('\uf1ad', 'FontAwesome', '61px', "#000000", 164.5, 270); //Building
+			example.addText('\uf0c8', 'FontAwesome', '49px', "#7cd1ff", 166, 260); //Square
+			example.addText('\uf0c8', 'FontAwesome', '49px', "#7cd1ff", 166, 270); //Square
+			example.addText('\uf1ad', 'FontAwesome', '60px', "#999999", 165, 270); //Building
+			
+			example.addText('\uf182', 'FontAwesome', '20px', "#6600a5", 353, 81); //Woman
+			example.addText('\uf183', 'FontAwesome', '20px', "#6600a5", 374, 69); //Man
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#6600a5", 366, 82); //Child
+			
+			example.addText('\uf1b9', 'FontAwesome', '20px', "#0800ff", 237, 153); //Car
+			example.addText('\uf1b9', 'FontAwesome', '20px', "#874c00", 237, 318); //Car
+			example.addText('\uf207', 'FontAwesome', '25px', "#b443bc", 683, 72); //Bus
+			example.addText('\uf0f9', 'FontAwesome', '27px', "#000000", 356, 33); //Ambulance
+			example.addText('\uf0d1', 'FontAwesome', '35px', "#3b4963", 429, 436); //Truck
+			
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 298, 78); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 308, 167); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 627, 241); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 24, 79); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 606, 91); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 307, 258); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 94, 165); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 713, 438); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '27px', "#136012", 31, 434); //Tree
+			
+			//Layered Objects
+			example.addText('\uf111', 'FontAwesome', '9px', "#ffffff", 413, 285); //Filled Circle
+			example.addText('\uf1e3', 'FontAwesome', '9px', "#000000", 413, 285); //Soccerball
+			
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#b29363", 389, 281); //Child
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#66420c", 420, 266); //Child
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#d8b177", 446, 283); //Child
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#a53b40", 407, 262); //Child
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#c9bb54", 436, 295); //Child
+			example.addText('\uf1ae', 'FontAwesome', '20px', "#6600a5", 397, 302); //Child
+			
+			
+			
+			//Billboard made from layered objects
+			example.addText('\uf0c8', 'FontAwesome', '48px', "#000000", 150, 381); //Square
+			example.addText('\uf0c8', 'FontAwesome', '48px', "#000000", 170, 381); //Square
+			example.addText('\uf26c', 'FontAwesome', '60px', "#000000", 150, 390); //TV
+			example.addText('\uf179', 'FontAwesome', '17px', "#ffffff", 156, 363); //Ad Image
+			example.addText('\uf109', 'FontAwesome', '17px', "#ffffff", 176, 363); //Ad Image
+			example.addText('\uf10b', 'FontAwesome', '17px', "#ffffff", 199, 363); //Ad Image
+			example.addText('think less buy more', 'sans-serif', '7px', "#ffffff", 152, 377); //Ad Words
+			//Shrubs
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#136012", 163, 401); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#a35400", 168, 401); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#004704", 173, 401); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#136012", 178, 401); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#a35400", 183, 401); //Tree
+			example.addText('\uf1bb', 'FontAwesome', '16px', "#004704", 188, 401); //Tree
+			
+			
+		});
+	</script>
 </body>
-<script src="canvas.js"></script>
 </html>
