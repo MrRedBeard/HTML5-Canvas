@@ -10,8 +10,19 @@
 	<script>
 		$(function()
 		{
-			example.config('2d', '800px', '480px', true); 
-			example.addImg('map.png', 0, 0, 800, 480);
+			example.config('2d', '800px', '480px', true); //Config
+			
+			example.addImg('map.png', 0, 0, 800, 480); //Build from background to front so background images first
+			
+			//Manual Manipulation
+			setTimeout(function() //Wait a few ms for fonts/images to load 
+			{
+				example.ctx.clearRect(0, 0, example.canvas.width, example.canvas.height);
+				example.ctx.font = '30px arial';
+				example.ctx.fillStyle = '#000000';
+				example.ctx.fillText('XCanvas', 20, 276);
+			}, 50);			
+			
 			example.addText('\uF276', 'FontAwesome', '48px', "#8c41f4", 651, 73); //Pin
 			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 286, 405); //Home
 			example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 364, 405); //Home

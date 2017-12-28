@@ -73,7 +73,7 @@ class XCanvas
 		var ctx = this.ctx; //Localize before handing off to function
 		var canvas = this.canvas;
 		
-		setTimeout(function() //Wait a few ms for fonts to load
+		setTimeout(function() //Wait a few ms for fonts/images to load
 		{
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			//ctx.strokeRect(x - 3, (y - fontSize.replace('px', '') - 3), 70, 50); //Rectangle //Dynamic https://stackoverflow.com/questions/33137588/how-do-i-draw-a-rectangle-around-a-text-in-html-canvas
@@ -151,8 +151,6 @@ $(function()
 
 
 /* FontAwesome
- FA Codes http://astronautweb.co/snippet/font-awesome/
-		  http://seehowsupport.com/font-awesome/
  \uF276 Map Pin
  \uF08d Thumbtack
  \uF108 Computer
@@ -165,6 +163,4 @@ $(function()
  \uF207 Bus Transportation
  \uF0EB Lightbulb Class
 ***/
-
-//Must add fa class somewhere on the page using this added to canvas during development
 
