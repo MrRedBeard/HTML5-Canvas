@@ -41,6 +41,12 @@ example.addImg('map.png', 0, 0, 800, 480); //Build from background to front so b
 example.addText('\uF276', 'FontAwesome', '48px', "#8c41f4", 651, 73); //Pin
 ```
 
+### or HTML Char Codes
+```javascript 
+example.addText('&#xf015;', 'FontAwesome', '60px', "#005f70", 286, 405); //Home
+example.addText('\uf015', 'FontAwesome', '60px', "#005f70", 364, 405); //Home
+```
+
 ### Supports
 
 * FontAwesome fonts and left room to use others
